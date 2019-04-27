@@ -3,7 +3,8 @@ $('body').on('keydown', (event) => {
   var arrowPress = event.key.match(/Arrow(Up|Down|Left|Right)/);
   if (arrowPress) {
     var direction = arrowPress[1];
-    SwimTeam.move(direction.toLowerCase());
+    console.log(direction); // direction = 'Left', 'Right', 'Down', 'Up
+    SwimTeam.move(direction.toLowerCase()); // 'left', 'right', 'down', 'up 
   }
 });
 

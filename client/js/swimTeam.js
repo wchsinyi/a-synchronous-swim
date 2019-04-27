@@ -9,19 +9,25 @@ const SwimTeam = {
     if (!SwimTeam.valid(direction)) {
       return;
     }
+
+    //!SwimTeam.valid('left')
     console.log(`Lets go: ${direction}`);
 
     // set the swim-team's direction
     $('.swimmer')
-      .removeClass((idx, classNames) => {
+      .removeClass(
+        (idx, classNames) => {
         var name = classNames.match(/(turn-\w+)/);
         return name && name[1];
       })
       .addClass(`turn-${direction}`);
+      // turn-left
+      
+
 
     // same direction as last time? -> if yes, move the swim-team
     if (SwimTeam.direction === direction) {
-      SwimTeam.updateLoc(direction);
+      SwimTeam.updateLoc(direction); // 'left' 
       $('.team')
         .css('top', `${SwimTeam.coords.top}px`)
         .css('left', `${SwimTeam.coords.left}px`);

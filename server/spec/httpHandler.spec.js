@@ -22,8 +22,16 @@ describe('server responses', () => {
   });
 
   it('should respond to a GET request for a swim command', (done) => {
-    // write your test here
+    let {req, res} = server.mock('/', 'GET');
+    httpHandler.router(req, res);
+    expect(res._responseCode).to.equal(200);
+    expect(res._ended).to.equal(true);
+    expect(res._data.toString()).to.be.empty;
+
     done();
+    // write your test here
+    // make a request right here to the next door neighbor named server! 
+    // look up what the previous sprints are doing when they issue an AJAX request. What is the syntax? 
   });
 
   xit('should respond with 404 to a GET request for a missing background image', (done) => {
