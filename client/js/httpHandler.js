@@ -46,7 +46,7 @@
     });
   };
 
-
+// https://stackoverflow.com/questions/12740659/downloading-images-with-node-js
   const picsFetchRequest = () => {
     $.ajax({
       type: 'GET',
