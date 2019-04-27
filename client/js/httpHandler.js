@@ -38,9 +38,26 @@
       processData: false,
       success: (data) => {   
         if (data){
-          console.log(JSON.stringify(data));
+          console.log(data);
+          SwimTeam.move(data); // 'left', 'right', 'down', 'up 
         } 
-        // console.log('success')
+      },
+      error: ()=> {console.log('error')}
+    });
+  };
+
+
+  const picsFetchRequest = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: (data) => {   
+        if (data){
+          console.log(data);
+        } 
       },
       error: ()=> {console.log('error')}
     });
@@ -70,7 +87,7 @@
 
   console.log('before')
   function step () {
-    setTimeout(step, 100)
+    setTimeout(step, 1000)
     // console.log('whats upppppp');
     commandFetchRequest();
   }
