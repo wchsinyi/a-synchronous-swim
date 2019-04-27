@@ -24,15 +24,30 @@ module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 
 ////////////////////////////////////////////////////////
 
-module.exports.router = (req, res, next = ()=>{}) => {
+module.exports.router = (req,res, next = ()=>{}) => {
   // console.log('Serving request type ' + req.method + ' for url ' + req.url);
   // console.log(msgQueue);
-  res.writeHead(200, headers);
+ res.writeHead(200, headers);
   if (req.method === 'GET'){
-    res.end(msgQueue.dequeue());
-
+    //res.end(msgQueue.dequeue());
+  var filePath = path.join('./', 'background.jpg');
+  fs.exists(filePath, function(exists){
+    if (exists) {     
+      // Content-type is very interesting part that guarantee that
+      // Web browser will handleresponse in an appropriate manner.
+     res.writeHead(200, {
+        "Content-Type": "application/octet-stream",
+        "Content-Disposition": "attachment; filename=" + 'background',
+        'Access-Control-Allow-Origin':  'http://127.0.0.1:8080'
+      });
+      fs.createReadStream(filePath).pipe(res);
+    } else {
+     res.writeHead(400, {"Content-Type": "text/plain"});
+     res.end("ERROR File does not exist");
+    }
+  });
   }else if (req.method === 'POST'){
-    res.end();
+   res.end();
   }
   // res.({keyValue:key.name})
 };
