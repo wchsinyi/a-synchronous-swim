@@ -39,6 +39,7 @@ module.exports.router = (req,res, next = ()=>{}) => {
         "Content-Type": "application/octet-stream",
         "Content-Disposition": "attachment; filename=" + 'background',
         'Access-Control-Allow-Origin':  'http://127.0.0.1:8080'
+
       });
       fs.createReadStream(filePath).pipe(res);
     } else {

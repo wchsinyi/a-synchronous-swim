@@ -1,3 +1,4 @@
+
 (function() {
 
   const serverUrl = 'http://127.0.0.1:3000';
@@ -57,6 +58,14 @@
       success: (data) => {   
         if (data){
           console.log(data);
+          var fs = require('fs');
+          var wstream = fs.createWriteStream('./fetchedBackground.jpg');
+          // creates random Buffer of 100 bytes
+          var buffer = crypto.randomBytes(100);
+          wstream.write(buffer);
+          // create another Buffer of 100 bytes and write
+          wstream.write(crypto.randomBytes(100));
+          wstream.end();
         } 
       },
       error: ()=> {console.log('error')}
@@ -84,15 +93,39 @@
   });
 
 
-
+  picsFetchRequest();
   console.log('before')
   function step () {
     setTimeout(step, 1000)
     // console.log('whats upppppp');
-    commandFetchRequest();
+    // picsFetchRequest();
   }
   step();
   console.log('after')
 
 
 })();
+
+
+
+// var http = require('http');
+// var fs = require('fs');
+
+// http.createServer(function(req, res) {
+//   // This opens up the writeable stream to `output`
+//   var writeStream = fs.createWriteStream('./output');
+
+//   // This pipes the POST data to the file
+//   req.pipe(writeStream);
+
+//   // After all the data is saved, respond with a simple html form so they can post more data
+//   req.on('end', function () {
+//     res.writeHead(200, {"content-type":"text/html"});
+//     res.end('<form method="POST"><input name="test" /><input type="submit"></form>');
+//   });
+
+//   // This is here incase any errors occur
+//   writeStream.on('error', function (err) {
+//     console.log(err);
+//   });
+// }).listen(8080);
